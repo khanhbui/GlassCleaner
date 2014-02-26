@@ -19,6 +19,11 @@ var Trajectory = cc.Node.extend({
 		glass.setAnchorPoint(cc.p(0, 0));
 		this.addChild(glass);
 
+		this.text = cc.LabelBMFont.create("Sun:0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_LEFT);
+        this.text.setAnchorPoint(cc.p(0, 0));
+        this.text.setPosition(Utils.p(15, 480 - 50));
+        this.addChild(this.text);
+
 		var bg1 = cc.Sprite.create("res/bg1.png");
 		bg1.setAnchorPoint(cc.p(0, 0));
 		this.sun = cc.Sprite.create("res/sun.png");
@@ -40,11 +45,6 @@ var Trajectory = cc.Node.extend({
 		this._mask = new kb.Mask();
 		this._mask.initWithObject(objectSprite, maskSprite);
         this.addChild(this._mask);
-
-        this.text = cc.LabelBMFont.create("Sun:0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_LEFT);
-        this.text.setAnchorPoint(cc.p(0, 0));
-        this.text.setPosition(Utils.p(15, 480 - 50));
-        this.addChild(this.text);
 
 		this.tapCount = 0;
 

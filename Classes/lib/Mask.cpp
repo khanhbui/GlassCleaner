@@ -107,7 +107,7 @@ CCSprite* Mask::maskSprite()
 }
 
 Mask::~Mask() {
-    CC_SAFE_FREE(masked);
-    CC_SAFE_FREE(maskSprite_);
-    CC_SAFE_FREE(objectSprite_);
+    // CC_SAFE_FREE(masked);
+    // CC_SAFE_RELEASE(maskSprite_);
+    // CC_SAFE_RELEASE(objectSprite_);
 }

@@ -25,20 +25,12 @@ package com.kd.GlassCleaner;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
 
 public class GlassCleaner extends Cocos2dxActivity{
 	
-	private AdView mAdView;
+	// private AdView mAdView;
 
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -49,7 +41,7 @@ public class GlassCleaner extends Cocos2dxActivity{
         /*
         mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.SMART_BANNER);
-        mAdView.setAdUnitId("a153037ca8993b0");
+        mAdView.setAdUnitId("a1530e0a2793b0f");
         mAdView.setAdListener(new AdListener() {
             private boolean isNotSetY = true;
             @Override
