@@ -2,7 +2,7 @@ var Trajectory = cc.Node.extend({
 	ctor: function(length, colorHead, colorTail, colorNinjaStar) {
 		this._super();
 
-		this.maxLength = length || 40;
+		this.maxLength = length || 30;
 		this.colorHead = colorHead || [1, 1, 0];
 		this.colorTail = colorTail || [1, 0, 0];
 		this.colorNinjaStar = colorNinjaStar;
@@ -41,11 +41,10 @@ var Trajectory = cc.Node.extend({
 		this._mask.initWithObject(objectSprite, maskSprite);
         this.addChild(this._mask);
 
-        var text = cc.LabelBMFont.create("Sun: 0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_RIGHT);
-        text.setAnchorPoint(cc.p(0, 0));
-        text.setPosition(Utils.p(10, 480 - 40));
-        // text.setString("hi there", true);
-        this.addChild(text);
+        this.text = cc.LabelBMFont.create("Sun:0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_LEFT);
+        this.text.setAnchorPoint(cc.p(0, 0));
+        this.text.setPosition(Utils.p(15, 480 - 50));
+        this.addChild(this.text);
 
 		this.tapCount = 0;
 
@@ -60,6 +59,7 @@ var Trajectory = cc.Node.extend({
 
 		this.scaleNumber = 0;
 		this.scaleSign = 1;
+		this.sunScore = 0;
 	},
 
 	getLength: function() {
@@ -236,6 +236,9 @@ var Trajectory = cc.Node.extend({
 		if (vList.length > this.maxLength) {
 			vList.pop();
 		}
+
+		this.sunScore++;
+		this.text.setString("Sun:" + this.sunScore, true);
 	},
 
 	onTouchEnded: function(touch, event) {

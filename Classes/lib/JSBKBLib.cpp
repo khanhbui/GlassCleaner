@@ -7,6 +7,7 @@
 JSClass*        jsb_mask_class;
 JSObject*       jsb_mask_prototype;
 
+
 JSBool js_constructor(JSContext* cx, uint32_t argc, jsval* vp){
     cocos2d::CCLog("Mask: JS Constructor...");
     if (argc == 0) {
@@ -33,6 +34,16 @@ JSBool js_constructor(JSContext* cx, uint32_t argc, jsval* vp){
     JS_ReportError(cx, "Mask: Wrong number of arguments: %d, was expecting: %d", argc, 0);
     
     return JS_FALSE;
+}
+
+JSBool js_mask_ctor(JSContext* cx, uint32_t argc, jsval* vp) {
+    JSObject *obj = JS_THIS_OBJECT(cx, vp);
+    Mask *nobj = new Mask();
+    js_proxy_t* p = jsb_new_proxy(nobj, obj);
+    nobj->autorelease();
+    JS_AddNamedObjectRoot(cx, &p->obj, "Mask");
+    JS_SET_RVAL(cx, vp, JSVAL_VOID);
+    return JS_TRUE;
 }
 
 JSBool js_initWithObject(JSContext* cx, uint32_t argc, jsval* vp){
@@ -207,6 +218,7 @@ void js_register_mask(JSContext* cx, JSObject* global){
         JS_FN("mask", js_mask, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("maskWithClear", js_maskWithClear, 3, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("reDrawMask", js_reDrawMask, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("ctor", js_mask_ctor, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FS_END
     };
 
@@ -233,12 +245,15 @@ void js_register_mask(JSContext* cx, JSObject* global){
     HASH_FIND_INT(_js_global_type_ht, &typeId, p);
     
     if (!p) {
+        CCLog("++++++ no p");
         p = (js_type_class_t* )malloc(sizeof(_js_global_type_ht));
         p->type = typeId;
         p->jsclass = jsb_mask_class;
         p->proto = jsb_mask_prototype;
         p->parentProto = jsb_CCNode_prototype;
         HASH_ADD_INT(_js_global_type_ht, type, p);
+    } else {
+        CCLog("++++++ has p");
     }
 }
 
