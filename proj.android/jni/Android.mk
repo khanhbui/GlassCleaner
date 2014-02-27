@@ -7,9 +7,12 @@ LOCAL_MODULE := cocos2djs_shared
 LOCAL_MODULE_FILENAME := libcocos2djs
 
 LOCAL_SRC_FILES := hellojavascript/main.cpp \
-                   ../../Classes/AppDelegate.cpp
+                   ../../Classes/AppDelegate.cpp \
+				   ../../Classes/lib/Mask.cpp \
+				   ../../Classes/lib/JSBKBLib.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/lib
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos_jsb_static
 LOCAL_WHOLE_STATIC_LIBRARIES += jsb_extension_static
