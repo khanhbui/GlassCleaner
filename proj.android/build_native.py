@@ -77,7 +77,9 @@ def do_build(cocos_root, ndk_root, app_android_root,ndk_build_param,sdk_root,and
     if platform == 'win32':
         ndk_module_path = 'NDK_MODULE_PATH=%s;%s/external;%s/cocos' % (cocos_root, cocos_root, cocos_root)
     else:
-        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/external:%s/cocos' % (cocos_root, cocos_root, cocos_root)
+        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/external:%s/cocos:%s/plugin/publish' % (cocos_root, cocos_root, cocos_root, cocos_root)
+
+    print ndk_module_path;
 
     num_of_cpu = get_num_of_cpu()
 	
@@ -85,6 +87,8 @@ def do_build(cocos_root, ndk_root, app_android_root,ndk_build_param,sdk_root,and
         command = '%s -j%d -C %s %s' % (ndk_path, num_of_cpu, app_android_root, ndk_module_path)
     else:
         command = '%s -j%d -C %s %s %s' % (ndk_path, num_of_cpu, app_android_root, ''.join(str(e) for e in ndk_build_param), ndk_module_path)
+
+    print command;
     if os.system(command) != 0:
         raise Exception("Build dynamic library for project [ " + app_android_root + " ] fails!")
     elif android_platform is not None:

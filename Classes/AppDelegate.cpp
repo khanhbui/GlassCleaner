@@ -11,6 +11,7 @@
 #include "jsb_opengl_registration.h"
 #include "localstorage/js_bindings_system_registration.h"
 #include "lib/JSBKBLib.h"
+#include "MyAdsListener.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -50,7 +51,20 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineProtocol *engine = ScriptingCore::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     ScriptingCore::getInstance()->runScript("cocos2d-jsb.js");
-       
+
+    cocos2d::plugin::TAdsDeveloperInfo devInfo;
+    devInfo["AdmobID"] = "a1530e0a2793b0f"; /*my id*/
+    cocos2d::plugin::ProtocolAds* admob =  dynamic_cast<cocos2d::plugin::ProtocolAds*>(cocos2d::plugin::PluginManager::getInstance()->loadPlugin("AdsAdmob"));
+    cocos2d::plugin::AdsListener* listener = new MyAdsListener();
+    cocos2d::plugin::ProtocolAds::AdsPos posAdmob = cocos2d::plugin::ProtocolAds::kPosTopLeft;
+    cocos2d::plugin::TAdsInfo adInfo;
+    admob->configDeveloperInfo(devInfo);
+    admob->setAdsListener(listener);
+    admob->setDebugMode(false);
+    adInfo["AdmobType"] = "1";
+    adInfo["AdmobSizeEnum"] = "1";
+    admob->showAds(adInfo, posAdmob);
+
     return true;
 }
 
