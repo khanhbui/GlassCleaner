@@ -27,18 +27,17 @@ var Trajectory = cc.Node.extend({
 		var bg1 = cc.Sprite.create("res/bg1.png");
 		bg1.setAnchorPoint(cc.p(0, 0));
 		this.sun = cc.Sprite.create("res/sun.png");
-		this.sun.setAnchorPoint(cc.p(0, 0));
-		this.sun.setPosition(Utils.p(50, 100));
+		this.sun.setPosition(Utils.p(150, 180));
 		var bg2 = cc.Sprite.create("res/bg2.png");
 		bg2.setAnchorPoint(cc.p(0, 0));
-		var objectSprite = cc.Node.create();
-		objectSprite.addChild(bg1);
+        var objectSprite = bg1; //cc.Node.create();
+		//objectSprite.addChild(bg1);
 		objectSprite.addChild(this.sun);
 		objectSprite.addChild(bg2);
 
 		this.prim = cc.DrawNode.create();
 
-		var maskSprite = cc.Sprite.create("res/mask.png");
+        var maskSprite = cc.Sprite.create(); //"res/mask.png");
 		maskSprite.setAnchorPoint(cc.p(0, 0));
 		maskSprite.addChild(this.prim);
 

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A922753C1517C094001B78AA"
-               BuildableName = "GlassCleaner iOS.app"
+               BuildableName = "Glass Cleaner iOS.app"
                BlueprintName = "Glass Cleaner iOS"
                ReferencedContainer = "container:Glass Cleaner.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A922753C1517C094001B78AA"
-            BuildableName = "GlassCleaner iOS.app"
+            BuildableName = "Glass Cleaner iOS.app"
             BlueprintName = "Glass Cleaner iOS"
             ReferencedContainer = "container:Glass Cleaner.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A922753C1517C094001B78AA"
-            BuildableName = "GlassCleaner iOS.app"
+            BuildableName = "Glass Cleaner iOS.app"
             BlueprintName = "Glass Cleaner iOS"
             ReferencedContainer = "container:Glass Cleaner.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A922753C1517C094001B78AA"
-            BuildableName = "GlassCleaner iOS.app"
+            BuildableName = "Glass Cleaner iOS.app"
             BlueprintName = "Glass Cleaner iOS"
             ReferencedContainer = "container:Glass Cleaner.xcodeproj">
          </BuildableReference>

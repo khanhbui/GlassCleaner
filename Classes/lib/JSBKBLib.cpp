@@ -45,13 +45,13 @@ JSBool js_mask_create(JSContext *cx, uint32_t argc, jsval *vp)
 	
 	do {
 		if (argc == 2) {
-            cocos2d::Node* arg0;
+            cocos2d::Sprite* arg0;
 			do {
 				if (!argv[0].isObject()) { ok = JS_FALSE; break; }
 				js_proxy_t *proxy;
 				JSObject *tmpObj = JSVAL_TO_OBJECT(argv[0]);
 				proxy = jsb_get_js_proxy(tmpObj);
-				arg0 = (cocos2d::Node*)(proxy ? proxy->ptr : NULL);
+				arg0 = (cocos2d::Sprite*)(proxy ? proxy->ptr : NULL);
 				JSB_PRECONDITION2( arg0, cx, JS_FALSE, "Invalid Native Object");
 			} while (0);
 			if (!ok) { ok = JS_TRUE; break; }
