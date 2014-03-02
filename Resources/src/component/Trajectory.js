@@ -19,7 +19,7 @@ var Trajectory = cc.Node.extend({
 		glass.setAnchorPoint(cc.p(0, 0));
 		this.addChild(glass);
 
-		this.text = cc.LabelBMFont.create("Sun:0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_LEFT);
+		this.text = cc.LabelBMFont.create("Score:0", "res/font/font.fnt", 35, cc.TEXT_ALIGNMENT_LEFT);
         this.text.setAnchorPoint(cc.p(0, 0));
         this.text.setPosition(Utils.p(15, 480 - 50));
         this.addChild(this.text);
