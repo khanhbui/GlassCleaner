@@ -38,7 +38,7 @@ public class Cocos2dxActivity extends NativeActivity{
 	    };*/
 		
 		//2.Set the format of window
-		getWindow().setFormat(PixelFormat.TRANSLUCENT);
+		//getWindow().setFormat(PixelFormat.TRANSLUCENT);
 		
 		final Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
