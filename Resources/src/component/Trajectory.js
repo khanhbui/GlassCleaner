@@ -26,14 +26,6 @@ var Trajectory = cc.Node.extend({
 
 		var bg1 = cc.Sprite.create("res/bg1.png");
 		bg1.setAnchorPoint(cc.p(0, 0));
-		this.sun = cc.Sprite.create("res/sun.png");
-		this.sun.setPosition(Utils.p(150, 180));
-		var bg2 = cc.Sprite.create("res/bg2.png");
-		bg2.setAnchorPoint(cc.p(0, 0));
-        var objectSprite = bg1; //cc.Node.create();
-		//objectSprite.addChild(bg1);
-		objectSprite.addChild(this.sun);
-		objectSprite.addChild(bg2);
 
 		this.prim = cc.DrawNode.create();
 
@@ -41,7 +33,7 @@ var Trajectory = cc.Node.extend({
 		maskSprite.setAnchorPoint(cc.p(0, 0));
 		maskSprite.addChild(this.prim);
 
-		this._mask = kb.Mask.create(objectSprite, maskSprite);
+		this._mask = kb.Mask.create(bg1, maskSprite);
         this.addChild(this._mask);
 
 		this.tapCount = 0;
@@ -125,12 +117,6 @@ var Trajectory = cc.Node.extend({
 			}
 
 			this._mask.maskWithClear(0, 0, 0, 0);
-
-			this.scaleNumber += 0.04 * this.scaleSign;
-			if (Math.abs(this.scaleNumber) > 0.09) {
-				this.scaleSign *= -1;
-			}
-			this.sun.setScale(1 + this.scaleNumber);
 		}
 		else {
 			p.setVisible( false );
@@ -236,7 +222,7 @@ var Trajectory = cc.Node.extend({
 		}
 
 		this.sunScore++;
-		this.text.setString("Sun:" + this.sunScore, true);
+		this.text.setString("Score:" + this.sunScore, true);
 	},
 
 	onTouchEnded: function(touch, event) {
