@@ -33,7 +33,7 @@ var MyLayer = cc.Layer.extend({
         this._super();
         cc.associateWithNative(this, cc.Layer);
 
-        this.setKeypadEnabled(true);
+        this.setKeyboardEnabled(true);
         this.setTouchEnabled(true);
     },
 

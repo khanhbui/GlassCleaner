@@ -40,7 +40,7 @@ cc.BuilderReader.load = function(file, owner, parentSize)
             var callbackName = ownerCallbackNames[i];
             var callbackNode = ownerCallbackNodes[i];
 
-           if (owner[callbackName] === undefined)
+            if (owner[callbackName] === undefined)
             {
                 cc.log("Warning: " + "owner." + callbackName + " is undefined.");
             }

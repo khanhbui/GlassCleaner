@@ -93,17 +93,17 @@ cc.TMX_TILE_VERTICAL_FLAG	= 0x40000000;
 cc.TEXT_ALIGNMENT_CENTER	= 0x1;
 cc.TEXT_ALIGNMENT_LEFT	= 0x0;
 cc.TEXT_ALIGNMENT_RIGHT	= 0x2;
-cc.TEXTURE2_D_PIXEL_FORMAT_A8	= 0x3;
-cc.TEXTURE2_D_PIXEL_FORMAT_A_I88	= 0x5;
-cc.TEXTURE2_D_PIXEL_FORMAT_DEFAULT	= 0x0;
-cc.TEXTURE2_D_PIXEL_FORMAT_I8	= 0x4;
-cc.TEXTURE2_D_PIXEL_FORMAT_PVRTC2	= 0x9;
-cc.TEXTURE2_D_PIXEL_FORMAT_PVRTC4	= 0x8;
-cc.TEXTURE2_D_PIXEL_FORMAT_RG_B565	= 0x2;
-cc.TEXTURE2_D_PIXEL_FORMAT_RGB5_A1	= 0x7;
-cc.TEXTURE2_D_PIXEL_FORMAT_RG_B888	= 0x1;
-cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A4444	= 0x6;
-cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888	= 0x0;
+cc.TEXTURE_2D_PIXEL_FORMAT_A8	= 0x3;
+cc.TEXTURE_2D_PIXEL_FORMAT_AI88	= 0x5;
+cc.TEXTURE_2D_PIXEL_FORMAT_DEFAULT	= 0x0;
+cc.TEXTURE_2D_PIXEL_FORMAT_I8	= 0x4;
+cc.TEXTURE_2D_PIXEL_FORMAT_PVRTC2	= 0x9;
+cc.TEXTURE_2D_PIXEL_FORMAT_PVRTC4	= 0x8;
+cc.TEXTURE_2D_PIXEL_FORMAT_RGB565	= 0x2;
+cc.TEXTURE_2D_PIXEL_FORMAT_RGB5A1	= 0x7;
+cc.TEXTURE_2D_PIXEL_FORMAT_RGB888	= 0x1;
+cc.TEXTURE_2D_PIXEL_FORMAT_RGBA4444	= 0x6;
+cc.TEXTURE_2D_PIXEL_FORMAT_RGBA8888	= 0x0;
 cc.TOUCHES_ALL_AT_ONCE	= 0x0;
 cc.TOUCHES_ONE_BY_ONE	= 0x1;
 cc.TRANSITION_ORIENTATION_DOWN_OVER	= 0x1;
@@ -168,27 +168,3 @@ cc.UNIFORM_RANDOM01_S	= 'CC_Random01';
 cc.UNIFORM_SAMPLER_S	= 'CC_Texture0';
 cc.UNIFORM_SIN_TIME_S	= 'CC_SinTime';
 cc.UNIFORM_TIME_S	= 'CC_Time';
-
-cc.RESOLUTION_POLICY = {
-    // The entire application is visible in the specified area without trying to preserve the original aspect ratio.
-    // Distortion can occur, and the application may appear stretched or compressed.
-    EXACTFIT:0,
-    // The entire application fills the specified area, without distortion but possibly with some cropping,
-    // while maintaining the original aspect ratio of the application.
-    NOBORDER:1,
-    // The entire application is visible in the specified area without distortion while maintaining the original
-    // aspect ratio of the application. Borders can appear on two sides of the application.
-    SHOW_ALL:2,
-    // The application takes the height of the design resolution size and modifies the width of the internal
-    // canvas so that it fits the aspect ratio of the device
-    // no distortion will occur however you must make sure your application works on different
-    // aspect ratios
-    HEIGHT:3,
-    // The application takes the width of the design resolution size and modifies the height of the internal
-    // canvas so that it fits the aspect ratio of the device
-    // no distortion will occur however you must make sure your application works on different
-    // aspect ratios
-    WIDTH:4,
-
-    UNKNOWN:5
-};

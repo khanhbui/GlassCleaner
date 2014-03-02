@@ -4,11 +4,6 @@
 
 var cc = cc || {};
 
-/**
- * Device type
- * @constant
- * @type {Object}
- */
 cc.TARGET_PLATFORM = {
     WINDOWS:0,
     LINUX:1,
@@ -21,6 +16,30 @@ cc.TARGET_PLATFORM = {
     EMSCRIPTEN:8,
     MOBILE_BROWSER:100,
     PC_BROWSER:101
+};
+
+cc.RESOLUTION_POLICY = {
+    // The entire application is visible in the specified area without trying to preserve the original aspect ratio.
+    // Distortion can occur, and the application may appear stretched or compressed.
+EXACT_FIT:0,
+    // The entire application fills the specified area, without distortion but possibly with some cropping,
+    // while maintaining the original aspect ratio of the application.
+NO_BORDER:1,
+    // The entire application is visible in the specified area without distortion while maintaining the original
+    // aspect ratio of the application. Borders can appear on two sides of the application.
+SHOW_ALL:2,
+    // The application takes the height of the design resolution size and modifies the width of the internal
+    // canvas so that it fits the aspect ratio of the device
+    // no distortion will occur however you must make sure your application works on different
+    // aspect ratios
+FIXED_HEIGHT:3,
+    // The application takes the width of the design resolution size and modifies the height of the internal
+    // canvas so that it fits the aspect ratio of the device
+    // no distortion will occur however you must make sure your application works on different
+    // aspect ratios
+FIXED_WIDTH:4,
+    
+UNKNOWN:5
 };
 
 cc.LANGUAGE_ENGLISH    = 0;
@@ -202,10 +221,10 @@ cc.gray = function () {
 //
 // Color 4B
 //
-cc.c4b = function (r, g, b, a) {
+cc.c4b = function( r, g, b, a )
+{
     return {r:r, g:g, b:b, a:a };
 };
-
 cc._c4b = function( r, g, b, a )
 {
     cc._reuse_color4b.r = r;
@@ -218,7 +237,25 @@ cc._c4b = function( r, g, b, a )
 cc.c4 = cc.c4b;
 cc._c4 = cc._c4b;
 
-cc.c4f = function (r, g, b, a) {
+/**
+ * convert Color3B to a string of color for style.
+ * e.g.  Color3B(255,6,255)  to : "#ff06ff"
+ * @param clr
+ * @return {String}
+ */
+cc.convertColor3BtoHexString = function (clr) {
+    var hR = clr.r.toString(16);
+    var hG = clr.g.toString(16);
+    var hB = clr.b.toString(16);
+    var stClr = "#" + (clr.r < 16 ? ("0" + hR) : hR) + (clr.g < 16 ? ("0" + hG) : hG) + (clr.b < 16 ? ("0" + hB) : hB);
+    return stClr;
+};
+
+//
+// Color 4F
+//
+cc.c4f = function( r, g, b, a )
+{
     return {r:r, g:g, b:b, a:a };
 };
 
@@ -236,20 +273,6 @@ cc.c4BFromccc4F = function (c) {
 
 cc.c4FEqual = function (a, b) {
     return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
-};
-
-/**
- * convert Color3B to a string of color for style.
- * e.g.  Color3B(255,6,255)  to : "#ff06ff"
- * @param clr
- * @return {String}
- */
-cc.convertColor3BtoHexString = function (clr) {
-    var hR = clr.r.toString(16);
-    var hG = clr.g.toString(16);
-    var hB = clr.b.toString(16);
-    var stClr = "#" + (clr.r < 16 ? ("0" + hR) : hR) + (clr.g < 16 ? ("0" + hG) : hG) + (clr.b < 16 ? ("0" + hB) : hB);
-    return stClr;
 };
 
 //
@@ -306,16 +329,35 @@ cc.sizeEqualToSize = function (size1, size2)
 {
     return ((size1.width == size2.width) && (size1.height == size2.height));
 };
+
 cc.SizeZero = function () {
     return cc.size(0, 0);
 };
 
-//
-// Rect
-//
+/**
+ * create a cc.rect object
+ * @param {Number|cc.point|cc.rect} [x] a Number value as x or a cc.point object as origin or a cc.rect clone object
+ * @param {Number|cc.size} [y] x1 a Number value as y or a cc.size object as size
+ * @param {Number} [w]
+ * @param {Number} [h]
+ * @return {Object} a cc.rect object
+ */
 cc.rect = function(x,y,w,h)
 {
-    return {x:x, y:y, width:w, height:h};
+    var argLen = arguments.length;
+    if (argLen === 0)
+        return { x: 0, y: 0, width: 0, height: 0 };
+
+    if (argLen === 1)
+        return { x: x.x, y: x.y, width: x.width, height: x.height };
+
+    if (argLen === 2)
+        return { x: x.x, y: x.y, width: y.width, height: y.height };
+
+    if (argLen === 4)
+        return { x: x, y: y, width: w, height: h };
+
+    throw "unknown argument type";
 };
 cc._rect = function(x,y,w,h)
 {
@@ -402,82 +444,6 @@ cc.rectIntersection = function (rectA, rectB) {
 
 cc.RectZero = function () {
     return cc.rect(0, 0, 0, 0);
-};
-
-cc.VisibleRect = {
-    _topLeft:cc.p(0,0),
-    _topRight:cc.p(0,0),
-    _top:cc.p(0,0),
-    _bottomLeft:cc.p(0,0),
-    _bottomRight:cc.p(0,0),
-    _bottom:cc.p(0,0),
-    _center:cc.p(0,0),
-    _left:cc.p(0,0),
-    _right:cc.p(0,0),
-    _width:0,
-    _height:0,
-    init:function(size){
-        this._width = size.width;
-        this._height = size.height;
-
-        var w = this._width;
-        var h = this._height;
-
-        //top
-        this._topLeft.y = h;
-        this._topRight.x = w;
-        this._topRight.y = h;
-        this._top.x = w/2;
-        this._top.y = h;
-
-        //bottom
-        this._bottomRight.x = w;
-        this._bottom.x = w/2;
-
-        //center
-        this._center.x = w/2;
-        this._center.y = h/2;
-
-        //left
-        this._left.y = h/2;
-
-        //right
-        this._right.x = w;
-        this._right.y = h/2;
-    },
-    getWidth:function(){
-        return this._width;
-    },
-    getHeight:function(){
-        return this._height;
-    },
-    topLeft:function(){
-        return this._topLeft;
-    },
-    topRight:function(){
-        return this._topRight;
-    },
-    top:function(){
-        return this._top;
-    },
-    bottomLeft:function(){
-        return this._bottomLeft;
-    },
-    bottomRight:function(){
-        return this._bottomRight;
-    },
-    bottom:function(){
-        return this._bottom;
-    },
-    center:function(){
-        return this._center;
-    },
-    left:function(){
-        return this._left;
-    },
-    right:function(){
-        return this._right;
-    }
 };
 
 //
@@ -684,8 +650,15 @@ cc.Class.extend = function (prop) {
     // The dummy class constructor
     function Class() {
         // All construction is actually done in the init method
-        if (!initializing && this.ctor)
-            this.ctor.apply(this, arguments);
+        if (!initializing) {
+            if (!this.ctor) {
+                if (this.__nativeObj)
+                    cc.log("No ctor function found! Please check whether `classes_need_extend` section in `ini` file like which in `tools/tojs/cocos2dx.ini`");
+            }
+            else {
+                this.ctor.apply(this, arguments);
+            }
+        }
     }
 
     // Populate our constructed prototype object
@@ -847,3 +820,4 @@ cc.VisibleRect = {
         return this._right;
     }
 };
+

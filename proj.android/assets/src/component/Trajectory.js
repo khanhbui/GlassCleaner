@@ -42,8 +42,7 @@ var Trajectory = cc.Node.extend({
 		maskSprite.setAnchorPoint(cc.p(0, 0));
 		maskSprite.addChild(this.prim);
 
-		this._mask = new kb.Mask();
-		this._mask.initWithObject(objectSprite, maskSprite);
+		this._mask = kb.Mask.create(objectSprite, maskSprite);
         this.addChild(this._mask);
 
 		this.tapCount = 0;
@@ -126,7 +125,7 @@ var Trajectory = cc.Node.extend({
 				);
 			}
 
-			this._mask.mask();
+			this._mask.maskWithClear(0, 0, 0, 0);
 
 			this.scaleNumber += 0.04 * this.scaleSign;
 			if (Math.abs(this.scaleNumber) > 0.09) {
